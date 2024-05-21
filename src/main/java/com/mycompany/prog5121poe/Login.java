@@ -4,7 +4,7 @@
  */
 package com.mycompany.prog5121poe;
 
-import java.util.Scanner;
+import javax.swing.*;
 
 /**
  *
@@ -13,30 +13,36 @@ import java.util.Scanner;
 public class Login {
     
     String username;
-        
+    boolean usernamecheck;
+    boolean usernamevalidity;
+    
+    //This method checks if the username contains an underscore and has no more than 5 letters.
     public void checkUserName(){
-                
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter username");
-        username = scan.nextLine();
+        
+        username = JOptionPane.showInputDialog("Enter username here");
         
         boolean usernamecheck = username.contains("_");
         
-        if(usernamecheck == true && username.length() <= 5)
-           System.out.println("Username successfully captured");
-        else
-            System.out.println("Username is not correctly formatted, please ensure that your username contains an underscore and is no more than 5 characters in length.");
+        if(usernamecheck == true && username.length() <= 5){
+           JOptionPane.showMessageDialog(null, "Username successfully captured");
+            usernamevalidity = true;
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Username is not correctly formatted, please ensure that your username contains an underscore and is no more than 5 characters in length.");
+            usernamevalidity = false;
+        }
     }
-    
         String password;;
         boolean passwordcomplexity;
+        boolean allnumber;
+        boolean specialcharacter;
+        boolean capitalletter;
         
+    //This method checks if the password contains a number, a capital letter, a special characters and has characters that are more than or equal to 8.
     public void checkPasswordComplexity(){
-                
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter password");
-        password = scan.nextLine();
         
+        password = JOptionPane.showInputDialog("Enter password here");
+
         boolean anumber = password.contains("0"), anumber1 = password.contains("1"), anumber2 = password.contains("2"), anumber3 = password.contains("3"), anumber4 = password.contains("4"), anumber5 = password.contains("5"), anumber6 = password.contains("6"), anumber7 = password.contains("7"), anumber8 = password.contains("8"), anumber9 = password.contains("9");
         boolean allnumber = anumber || anumber1 || anumber2 || anumber3 || anumber4 || anumber5 || anumber6 || anumber7 || anumber8 || anumber9;
 
@@ -48,14 +54,14 @@ public class Login {
         
         if(password.length() >= 8 && allnumber == true && specialcharacter == true && capitalletter == true){
             passwordcomplexity = true;
-                System.out.println("Password successfully captured");
+            JOptionPane.showMessageDialog(null, "Password successfully captured");
         }
         else{
             passwordcomplexity = false;
-            System.out.println("Password is not correctly formatted, please ensure that the password contains atleast 8 characters, a capital letter, a number and a special character.");        
+            JOptionPane.showMessageDialog(null, "Password is not correctly formatted, please ensure that the password contains atleast 8 characters, a capital letter, a number and a special character.");        
         }
     }    
-    
+    //This method validates the username and password if all the conditions have been met.
     public void registerUser(){
         
         String registeruser = "The two above conditions have been met and the user has been registered successfully.";
@@ -66,55 +72,49 @@ public class Login {
             usernamevalid = true;
         }
         else{
-            System.out.println("The username is incorrectly formatted");
+            JOptionPane.showMessageDialog(null, "The username is incorrectly formatted");
         }
 
         if(passwordcomplexity == true){
             passwordvalid = true;
         }
         else{
-            System.out.println("The password does not meet the complexity requirements");
+            JOptionPane.showMessageDialog(null, "The password does not meet the complexity requirements");
         }
         
         if(usernamevalid == true && passwordvalid == true){
-            System.out.println(registeruser);
+            JOptionPane.showMessageDialog(null, registeruser);
         }
-            
     }
     
-    boolean loginuser;
-            
+    boolean loginuser = false;
+    boolean all;
+    //This method verifies the user's Login details match their registration details.
     public void loginUser(){
-        
         String usernamelogin;
         String passwordlogin;
         
+        usernamelogin = JOptionPane.showInputDialog("Enter username");
+        passwordlogin = JOptionPane.showInputDialog("Enter password");
         
-        Scanner scanuser = new Scanner(System.in);
-        System.out.println("Enter username");
-        usernamelogin = scanuser.nextLine();
+        all = usernamecheck && allnumber && specialcharacter && capitalletter;
         
-        Scanner scanpass = new Scanner(System.in);
-        System.out.println("Enter password");
-        passwordlogin = scanpass.nextLine();
-        
-        if(usernamelogin.equals(username) && passwordlogin.equals(password))
+        if(usernamelogin.equals(username) && passwordlogin.equals(password) && username.length() <= 5 && password.length() >= 8)
             loginuser = true;
         
     }
 
+    //This method will tell the user whether or not their Login has been successful.
     public void returnLoginStatus(){
-        
         String loginstatus;
         
         if(loginuser == true){
             loginstatus = "A successful login";
-                System.out.print(loginstatus);
+                JOptionPane.showMessageDialog(null, loginstatus);
         }
         else{
             loginstatus = "A failed login";
-                System.out.println(loginstatus);
+                JOptionPane.showMessageDialog(null, loginstatus);
         }
     }
 }
-    
