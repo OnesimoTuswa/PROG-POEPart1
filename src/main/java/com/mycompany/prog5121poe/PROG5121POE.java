@@ -25,7 +25,6 @@ public class PROG5121POE {
                 registration.main();
                 registration.login();
             }
-            
             case 2 -> {
                 Login login = new Login();
                 login.checkUserName();
@@ -34,7 +33,6 @@ public class PROG5121POE {
                 login.loginUser();
                 login.returnLoginStatus();
             }
-            
             default -> JOptionPane.showMessageDialog(null, "Invalid");
         }
         

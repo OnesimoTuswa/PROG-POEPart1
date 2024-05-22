@@ -19,10 +19,6 @@ public class TasksTest {
     }
 
     @Test
-    public void testAddTasks() {
-    }
-
-    @Test
     public void testCheckTaskDescription() {
         tasks.checkTaskDescription();
         boolean expected = true;
@@ -35,17 +31,13 @@ public class TasksTest {
     public void testCreateTaskID() {
         tasks.createTaskID();
         String[] expected = {"LO:1:BYN"};
-        String[] actuality = new String[1];
+        String[] actuality = new String[tasks.numTasks];
         
         for(int i = 0; i < tasks.numTasks; i++){
             actuality[i] = tasks.taskID[i];
         }
         
         assertEquals(expected[0], actuality[0]);
-    }
-
-    @Test
-    public void testPrintTaskDetails() {
     }
 
     @Test

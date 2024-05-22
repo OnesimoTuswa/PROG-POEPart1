@@ -22,6 +22,7 @@ public class Tasks extends Login{
     String descriptionInput;
     String[] developerDetails;
     String developerDetailsInputFirst;
+    String[] developerDetailsFirst;
     String developerDetailsInputLast;
     int[] taskDuration;
     String taskDurationInput;
@@ -36,16 +37,19 @@ public class Tasks extends Login{
     String statusInput;
     int statusInputNum;
     
+    @SuppressWarnings("SuspiciousIndentAfterControlStatement")
     public void addTasks(){
         Login login = new Login();
         
-
         if(login.loginuser == true)
             JOptionPane.showMessageDialog(null, "Welcome to EasyKanban");
             boolean eof = false;
 
             while(eof == false){
-                option = JOptionPane.showInputDialog("Option 1: Add Tasks" + "\n" + "Option 2: Show report" + "\n" + "Option 3: Quit");
+                option = JOptionPane.showInputDialog("""
+                                                     Option 1: Add Tasks
+                                                     Option 2: Show report
+                                                     Option 3: Quit""");
                 int options = Integer.parseInt(option);
 
                 switch(options){
@@ -55,6 +59,7 @@ public class Tasks extends Login{
                         taskName = new String[numTasks];
                         taskNumber = new int[numTasks];
                         taskDescription = new String[numTasks];
+                        developerDetailsFirst = new String[numTasks];
                         developerDetails = new String[numTasks];
                         taskDuration = new int[numTasks];
                         taskID = new String[numTasks];
@@ -68,12 +73,13 @@ public class Tasks extends Login{
                             descriptionInput = JOptionPane.showInputDialog("Enter a short description of the task.");
                             taskDescription[i] = descriptionInput;
                             developerDetailsInputFirst = JOptionPane.showInputDialog("Enter first name of the developer assigned to the task.");
+                            developerDetailsFirst[i] = developerDetailsInputFirst;
                             developerDetailsInputLast = JOptionPane.showInputDialog("Enter last name of the developer assigned to the task.");
                             developerDetails[i] = developerDetailsInputFirst + " " + developerDetailsInputLast;
                             taskDurationInput = JOptionPane.showInputDialog("Enter the estimated duration of the task in hours");
                             taskDurationInputNum = Integer.parseInt(taskDurationInput);
                             taskDuration[i] = taskDurationInputNum;
-                            statusInput = JOptionPane.showInputDialog("Select task status from the following.\n Option 1: To Do \n Option 2: Doing \n Option 3: Done");
+                            statusInput = JOptionPane.showInputDialog("Select task status from the following.\n Option 1: To Do \n Option 2: Done \n Option 3: Doing");
                             statusInputNum = Integer.parseInt(statusInput);
                             switch (statusInputNum) {
                                 case 1:
@@ -86,9 +92,6 @@ public class Tasks extends Login{
                                     status[i] = doing;
                                     break;
                             }
-                            taskIDFormat = taskNameInput.charAt(0) + taskNameInput.charAt(1) + ":" + taskNumberInput + ":" + developerDetailsInputFirst.charAt(developerDetailsInputFirst.length() - 3) + developerDetailsInputFirst.charAt(developerDetailsInputFirst.length() - 2) + developerDetailsInputFirst.charAt(developerDetailsInputFirst.length() - 1);
-                            taskIdentification = taskIDFormat.toUpperCase();
-                            taskID[i] = taskIdentification;
                         }
                         break;
                     case 2:
@@ -98,7 +101,6 @@ public class Tasks extends Login{
                         eof = true;
                         break;
                 }
-            
         }
     }
     
@@ -127,26 +129,27 @@ public class Tasks extends Login{
         numTasks = Integer.parseInt(numTask);
         taskName = new String[numTasks];
         taskNumber = new int[numTasks];
-        developerDetails = new String[numTasks];
+        developerDetailsFirst = new String[numTasks];
         taskID = new String[numTasks];
-
-        for(int i = 0; i < numTasks; i++){
-        taskNameInput = JOptionPane.showInputDialog("Enter the name of the task.");
-        taskName[i] = taskNameInput;
-        taskNumberInput = i + 1;
-        taskNumber[i] = taskNumberInput;
-        developerDetailsInputFirst = JOptionPane.showInputDialog("Enter first name of the developer assigned to the task.");
-        developerDetails[i] = developerDetailsInputFirst;  
         
-        taskIDFormat = "" + taskNameInput.charAt(0) + taskNameInput.charAt(1) + ":" + taskNumberInput + ":" + developerDetailsInputFirst.charAt(developerDetailsInputFirst.length() - 3) + developerDetailsInputFirst.charAt(developerDetailsInputFirst.length() - 2) + developerDetailsInputFirst.charAt(developerDetailsInputFirst.length()-1);
-        taskIdentification = taskIDFormat.toUpperCase();
-        taskID[i] = taskIdentification;
+        for(int i = 0; i < numTasks; i++){     
+            taskNameInput = JOptionPane.showInputDialog("Enter the name of the task.");
+            taskName[i] = taskNameInput;
+            taskNumberInput = i + 1;
+            taskNumber[i] = taskNumberInput;
+            developerDetailsInputFirst = JOptionPane.showInputDialog("Enter first name of the developer assigned to the task.");
+            developerDetailsFirst[i] = developerDetailsInputFirst;
+            
+            taskIDFormat = "" + taskName[i].charAt(0) + taskName[i].charAt(1) + ":" + taskNumber[i] + ":" + developerDetailsFirst[i].charAt(developerDetailsFirst[i].length() - 3) + developerDetailsFirst[i].charAt(developerDetailsFirst[i].length() - 2) + developerDetailsFirst[i].charAt(developerDetailsFirst[i].length()-1);
+            taskIdentification = taskIDFormat.toUpperCase();
+            taskID[i] = taskIdentification;
+            JOptionPane.showMessageDialog(null, taskID[i]);
         }
     }
     
     public void printTaskDetails(){
         for(int i = 0; i < numTasks; i++){
-            JOptionPane.showMessageDialog(null, "Task Status: " + status[i] + "\n" + "Developer Details: " + developerDetails[i] + "\n" + "Task Number: " + taskNumber[i] + "\n" + "Task Name: " + taskName[i] + "\n" + "Task Description: " +taskDescription[i] + "\n" + "Task ID: " + taskID[i] + "\n" + "Task Duration: " + taskDuration[i]);
+            JOptionPane.showMessageDialog(null, "Task Status: " + status[i] + "\n" + "Developer Details: " + developerDetails[i] + "\n" + "Task Number: " + taskNumber[i] + "\n" + "Task Name: " + taskName[i] + "\n" + "Task Description: " +taskDescription[i] + "\n" + "Task ID: " + taskID[i] + "\n" + "Task Duration: " + taskDuration[i] + " hours");
         }
     }
 
@@ -162,6 +165,6 @@ public class Tasks extends Login{
             taskDuration[i] = taskDurationInputNum;
             totalTaskDuration += taskDuration[i];
         }
-        JOptionPane.showMessageDialog(null, totalTaskDuration);
+        JOptionPane.showMessageDialog(null, totalTaskDuration + " hours");
     }
 }
