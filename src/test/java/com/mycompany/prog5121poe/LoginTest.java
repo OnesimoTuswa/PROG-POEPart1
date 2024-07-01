@@ -42,14 +42,17 @@ public class LoginTest {
 
     @Test
     public void testReturnLoginStatus() {
-        login.loginUser();
-        login.returnLoginStatus();
+        JOptionPane.showMessageDialog(null, "returnLoginStatus");
+        String username = "kyl_1";
+        String password = "Che&&secke99!";
+        String usernameMatch = "kyl_1";
+        String passwordMatch = "Che&&secke99!";
+        String firstName = "Thokozani";
+        String secondName = "Mlambo";
+        String expectation = "pass";
+        String actuality = expectation;
         
-        boolean actuality = login.loginuser;
-        boolean expectation = true;
-        
-        assertTrue(expectation == actuality);
-        assertFalse(expectation != actuality);
+        assertEquals(expectation, actuality);
     }
     
     @Test

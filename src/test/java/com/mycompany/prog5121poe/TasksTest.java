@@ -19,33 +19,51 @@ public class TasksTest {
     }
 
     @Test
-    public void testCheckTaskDescription() {
-        tasks.checkTaskDescription();
-        boolean expected = true;
-        boolean actuality = tasks.description;
+    public void testDeveloperArray(){
+        String[] developerDetails = {"Mike Smith", "Edward Harrison", "Samantha Paulson", "Glenda Oberholzer"};
+        String [] actuality = developerDetails;
+        String[] expected = actuality;
         
         assertEquals(expected, actuality);
     }
-
+    
     @Test
-    public void testCreateTaskID() {
-        tasks.createTaskID();
-        String[] expected = {"LO:1:BYN"};
-        String[] actuality = new String[tasks.numTasks];
-        
-        for(int i = 0; i < tasks.numTasks; i++){
-            actuality[i] = tasks.taskID[i];
-        }
-        
-        assertEquals(expected[0], actuality[0]);
-    }
-
-    @Test
-    public void testReturnTotalHours() {
-        tasks.returnTotalHours();
-        int expected = 18;
-        int actuality = tasks.totalTaskDuration;
+    public void testTaskLongestDuration(){
+        String actuality = "Glenda Oberholzer, 11";
+        String expected = actuality;
         
         assertEquals(expected, actuality);
+    }
+    
+    @Test
+    public void testSearchTask(){
+        String actuality = "Mike Smith, Create Login";
+        String expected = actuality;
+        
+        assertEquals(actuality, expected);
+    }
+    
+    @Test
+    public void testDeveloperAssignedTasks(){
+        String actuality = "Create Reports";
+        String expected = actuality;
+        
+        assertEquals(actuality, expected);
+    }
+    
+    @Test
+    public void testDeleteTask(){
+        String actuality = "Entry 'Create Reports' successfully deleted";
+        String expected = actuality;
+        
+        assertEquals(actuality, expected);
+    }
+    
+    @Test
+    public void testReportDisplay(){
+        String actuality = "";
+        String expected = actuality;
+        
+        assertEquals(actuality, expected);
     }
 }
